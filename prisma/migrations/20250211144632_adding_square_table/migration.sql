@@ -1,0 +1,23 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[Square] (
+    [id] INT NOT NULL,
+    [value] BIT NOT NULL CONSTRAINT [Square_value_df] DEFAULT 0,
+    CONSTRAINT [Square_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH
