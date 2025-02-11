@@ -1,8 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import prisma from "./prisma";
-import { Server } from "socket.io";
-import { Prisma } from "@prisma/client";
 
 dotenv.config();
 
@@ -56,7 +54,9 @@ app.get("/", (_: Request, res: Response) => {
 
 app.get("/squares", async (_: Request, res: Response, next: NextFunction) => {
   try {
-    const squares = await prisma.square.findMany();
+    const squares = await prisma.square.findMany({
+      orderBy: { id: "asc" },
+    });
 
     res.json({
       status: 200,
