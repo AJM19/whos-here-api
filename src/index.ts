@@ -14,7 +14,7 @@ const server = app.listen(port, (): void =>
 const io = require("socket.io")(server, {
   pingTimeout: 50000,
   cors: {
-    origins: "http://localhost:5173",
+    origins: ["http://localhost:5173", "https://whos-here-app.onrender.com/"],
   },
 });
 
@@ -32,7 +32,10 @@ io.on("connection", (socket: any) => {
 });
 
 app.use((req, res, next) => {
-  const allowedOrigins = ["http://localhost:5173"];
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "https://whos-here-app.onrender.com/",
+  ];
 
   const origin = req.headers.origin;
   if (origin && allowedOrigins.includes(origin)) {
