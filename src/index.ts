@@ -74,7 +74,7 @@ app.post(
   "/update-square",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id, value } = req.body;
+      const { id, value, color } = req.body;
 
       if (!id) {
         throw new Error("No id provided");
@@ -85,10 +85,14 @@ app.post(
           id: id,
         },
         create: {
-          value: value as boolean,
+          id,
+          value,
+          color,
         },
         update: {
-          value: value as boolean,
+          id,
+          value,
+          color,
         },
       });
 

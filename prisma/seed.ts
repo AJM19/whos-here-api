@@ -4,9 +4,13 @@ import prisma from "../src/prisma";
 async function main() {
   console.log("🌱 Seeding squares...");
 
-  const defaultSquares: Prisma.SquareCreateManyInput[] = new Array(900).fill({
-    value: false,
-  });
+  const defaultSquares: Prisma.SquareCreateManyInput[] = Array.from(
+    { length: 900 },
+    (_, i) => ({
+      id: i + 1,
+      value: "",
+    }),
+  );
 
   await prisma.square.createMany({
     data: [...defaultSquares],

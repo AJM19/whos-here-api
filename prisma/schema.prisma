@@ -8,6 +8,7 @@ datasource db {
 }
 
 model Square {
-  id    Int     @id @default(autoincrement())
-  value Boolean @default(false)
+  id    Int     @id
+  value String  @default("")
+  color String? @default("black")
 }
